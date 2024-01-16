@@ -1,0 +1,34 @@
+---
+title: 'このサイトにドメインを設定した'
+date: '2024-1-26'
+tags: ['TECH', 'ドメイン', 'Vecerl', 'Cloudflare']
+draft: false
+summary: '実はRoute53以外でドメイン取ったの初めてかも'
+---
+
+以下の記事が参考になった。
+
+[VercelのアプリケーションにCloudflareで購入した独自ドメインを設定する](https://zenn.dev/keitakn/articles/add-cloudflare-domain-to-vercel)
+
+## やったこと
+
+- Cloudflareのアカウントを作成
+- Cloudflareでドメインを取得
+- Vercelのプロジェクトにドメインを設定
+- CloudflareでDNSの設定
+
+## ハマったこと
+
+Vecerlのドメイン設定画面で`Invalid Configuration`と`Valid Configuration`が交互に表示される。
+
+### 対応
+
+- CloudflareのDNSの設定で、Proxy statusをDNS onlyに変更
+
+  - 実はVercelの公式ドキュメントに書いてあった
+  - [Vercel + Cloudflare Integration](https://vercel.com/docs/integrations/cloudflare#using-cloudflare-as-your-dns-provider)
+
+- CloudflareのSSL/TLS encryption modeをFull(Strict)に変更
+
+  - こちらは本当に効いているのか不明
+  - 挙動が安定化したという話を見かけたのと、より厳格な設定にできるんだったらそうしておけばいいかな、くらいの感覚
